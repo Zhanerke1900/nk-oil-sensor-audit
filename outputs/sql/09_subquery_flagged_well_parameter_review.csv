@@ -1,0 +1,11 @@
+well_id,parameter,observations,flagged_hours,zero_value_hours
+NK-7,SPM,6420,1,520
+NK-7,dynamometer_area,5553,2781,2
+NK-7,max_rod_weight,6421,2589,521
+NK-7,min_rod_weight,6421,1357,521
+NK-7,pump_fillage,5553,0,2
+NK-86,SPM,6105,0,13
+NK-86,dynamometer_area,5892,111,6
+NK-86,max_rod_weight,6106,107,14
+NK-86,min_rod_weight,6106,14,14
+NK-86,pump_fillage,5891,0,5

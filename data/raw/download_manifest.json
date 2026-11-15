@@ -1,0 +1,29 @@
+[
+  {
+    "file": "v2_train.csv",
+    "repo": "Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring-v2",
+    "revision": "4004bb78ca8811a87c2892a89e457c59d22ace2b",
+    "source_file": "train.csv",
+    "sha256": "8bf92fd97ac9b0d7ec2e7aa61be90f335c7f3b6ab2a84634fb8758b057efe26a",
+    "url": "https://huggingface.co/datasets/Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring-v2/resolve/4004bb78ca8811a87c2892a89e457c59d22ace2b/train.csv",
+    "size_bytes": 15840411
+  },
+  {
+    "file": "v2_test.csv",
+    "repo": "Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring-v2",
+    "revision": "4004bb78ca8811a87c2892a89e457c59d22ace2b",
+    "source_file": "test.csv",
+    "sha256": "8029113613ea2965cb94fc7bea50eee6f4c327b673ecc856d88d25dfb652c7d6",
+    "url": "https://huggingface.co/datasets/Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring-v2/resolve/4004bb78ca8811a87c2892a89e457c59d22ace2b/test.csv",
+    "size_bytes": 4005343
+  },
+  {
+    "file": "v1_full.csv",
+    "repo": "Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring",
+    "revision": "84e5103cef58c85dc924e4b47aaed8ef2c5cb3dd",
+    "source_file": "wells_dataset.csv",
+    "sha256": "7a31fca2a4709a3bf9513bdc5fe7ed8f66a543a8d4e0c6855282ee8dde5f70b2",
+    "url": "https://huggingface.co/datasets/Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring/resolve/84e5103cef58c85dc924e4b47aaed8ef2c5cb3dd/wells_dataset.csv",
+    "size_bytes": 12575376
+  }
+]

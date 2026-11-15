@@ -1,0 +1,39 @@
+erDiagram
+    wells ||--o{ well_parameters : has
+    parameters ||--o{ well_parameters : permits
+    well_parameters ||--o{ observations : records
+    observations ||--o{ observation_flags : carries
+    flags ||--o{ observation_flags : describes
+    wells {
+        TEXT well_id PK
+        TEXT well_type
+    }
+    parameters {
+        TEXT parameter PK
+        TEXT unit
+        TEXT applicable_well_type
+    }
+    well_parameters {
+        TEXT well_id PK,FK
+        TEXT parameter PK,FK
+    }
+    observations {
+        INTEGER observation_id PK
+        TEXT well_id FK
+        TEXT parameter FK
+        TEXT timestamp
+        REAL value
+        INTEGER n_obs
+        TEXT split
+        TEXT flag
+        TEXT regime
+        TEXT scale_period
+        INTEGER scale_review
+    }
+    flags {
+        TEXT flag_name PK
+    }
+    observation_flags {
+        INTEGER observation_id PK,FK
+        TEXT flag_name PK,FK
+    }

@@ -1,0 +1,7 @@
+well_id,parameter,kind,missing_start,missing_end,missing_hours
+NK-75,line_pressure,trailing,2026-06-25 22:00:00,2026-09-30 23:00:00,2330
+NK-91,SPM,trailing,2026-09-30 23:00:00,2026-09-30 23:00:00,1
+NK-91,pump_fillage,trailing,2026-09-30 23:00:00,2026-09-30 23:00:00,1
+NK-91,min_rod_weight,trailing,2026-09-30 23:00:00,2026-09-30 23:00:00,1
+NK-91,max_rod_weight,trailing,2026-09-30 23:00:00,2026-09-30 23:00:00,1
+NK-91,dynamometer_area,trailing,2026-09-30 23:00:00,2026-09-30 23:00:00,1

@@ -1,0 +1,16 @@
+well_id,flag_name,flag_occurrences
+NK-7,area_extreme,8
+NK-7,area_negative,2781
+NK-7,spm_outlier,1
+NK-7,weight_overflow,3946
+NK-77,area_negative,3
+NK-82,area_extreme,1
+NK-82,area_negative,39
+NK-82,spm_outlier,1
+NK-82,weight_overflow,30
+NK-86,area_extreme,88
+NK-86,area_negative,92
+NK-86,weight_overflow,121
+NK-91,area_negative,1
+NK-93,area_negative,5
+NK-93,weight_overflow,1

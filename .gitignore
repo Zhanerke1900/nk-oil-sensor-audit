@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/raw/*.csv
+data/processed/
+*.part
+.streamlit/secrets.toml
+docs/START_HERE_RU.md
+docs/DEFENSE_RU.md
+docs/REQUIREMENTS_CHECKLIST.md
+docs/TEAM_CONTRIBUTIONS.md

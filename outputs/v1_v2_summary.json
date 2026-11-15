@@ -1,0 +1,30 @@
+{
+  "v1_rows": 186251,
+  "v2_rows_in_v1_horizon": 187214,
+  "overlap_start": "2026-01-01 00:00:00",
+  "overlap_end": "2026-07-20 00:00:00",
+  "matched_keys": 186251,
+  "only_v1_keys": 0,
+  "only_v2_keys": 963,
+  "changed_values": 160674,
+  "unchanged_values": 25577,
+  "metadata_changes": 0,
+  "absolute_tolerance": 5.1e-05,
+  "changed_values_at_strict_tolerance_1e_6": 169072,
+  "v2_rows_outside_v1_horizon": 71173,
+  "maximum_absolute_change": 570556.3948741229,
+  "v1_validation": {
+    "raw_null_counts": {
+      "parameter": 0,
+      "timestamp": 0,
+      "unit": 0,
+      "value": 0,
+      "well_id": 0,
+      "well_type": 0
+    },
+    "exact_duplicates_removed": 0,
+    "conflicting_duplicate_records": 0,
+    "invalid_records": 0
+  },
+  "interpretation": "A release consistency audit, not a ground-truth accuracy test. The releases may differ in aggregation or preparation. No automatic replacement is made."
+}

@@ -1,0 +1,5 @@
+flag_name,occurrences,wells
+weight_overflow,4098,4
+area_negative,2921,6
+area_extreme,97,3
+spm_outlier,2,2

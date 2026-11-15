@@ -1,0 +1,261 @@
+{
+  "project": "Sensor Data Quality Audit and ETL Pipeline",
+  "topic_number": 19,
+  "rows": 258387,
+  "wells": 10,
+  "parameters": 8,
+  "active_series": 43,
+  "period_start": "2026-01-01 00:00:00",
+  "period_end": "2026-09-30 23:00:00",
+  "train_rows": 206706,
+  "test_rows": 51681,
+  "split_cutoff": "2026-08-08 22:00:00",
+  "test_start": "2026-08-08 23:00:00",
+  "expected_hourly_rows": 281736,
+  "missing_hourly_rows": 23349,
+  "missing_percent": 8.287545787545788,
+  "interior_gap_intervals": 1677,
+  "interior_missing_hours": 21014,
+  "boundary_gap_intervals": 6,
+  "boundary_missing_hours": 2335,
+  "flagged_rows": 7041,
+  "flagged_percent": 2.724982294000859,
+  "individual_flag_occurrences": 7118,
+  "zero_value_rows_retained": 7914,
+  "wide_rows": 65520,
+  "wide_columns": 12,
+  "source_flag_counts": {
+    "": 251346,
+    "weight_overflow": 4098,
+    "area_negative": 2844,
+    "area_extreme;area_negative": 77,
+    "area_extreme": 20,
+    "spm_outlier": 2
+  },
+  "individual_flag_counts": {
+    "weight_overflow": 4098,
+    "area_negative": 2921,
+    "area_extreme": 97,
+    "spm_outlier": 2
+  },
+  "ingestion": {
+    "splits": {
+      "train": {
+        "raw_null_counts": {
+          "flag": 203128,
+          "n_obs": 0,
+          "parameter": 0,
+          "timestamp": 0,
+          "unit": 0,
+          "value": 0,
+          "well_id": 0,
+          "well_type": 0
+        },
+        "exact_duplicates_removed": 0,
+        "conflicting_duplicate_records": 0,
+        "invalid_records": 0
+      },
+      "test": {
+        "raw_null_counts": {
+          "flag": 48218,
+          "n_obs": 0,
+          "parameter": 0,
+          "timestamp": 0,
+          "unit": 0,
+          "value": 0,
+          "well_id": 0,
+          "well_type": 0
+        },
+        "exact_duplicates_removed": 0,
+        "conflicting_duplicate_records": 0,
+        "invalid_records": 0
+      }
+    },
+    "raw_csv_frame_bytes": 89971033,
+    "memory_before_optimization_bytes": 92641780,
+    "memory_after_optimization_bytes": 5946095,
+    "memory_reduction_percent": 93.58162699378185,
+    "largest_parsed_chunk_bytes": 17476529,
+    "chunksize": 50000,
+    "memory_measurement": "DataFrame.memory_usage(deep=True); same validated columns before/after dtype optimization; derived audit fields excluded",
+    "loading_seconds": 3.181570799999463
+  },
+  "splits": [
+    {
+      "split": "train",
+      "rows": 206706,
+      "start": "2026-01-01 00:00:00",
+      "end": "2026-08-08 22:00:00",
+      "expected_hours_across_series": 226997,
+      "missing_hours_across_series": 20291,
+      "flagged_rows": 3578
+    },
+    {
+      "split": "test",
+      "rows": 51681,
+      "start": "2026-08-08 23:00:00",
+      "end": "2026-09-30 23:00:00",
+      "expected_hours_across_series": 54739,
+      "missing_hours_across_series": 3058,
+      "flagged_rows": 3463
+    }
+  ],
+  "database_build_seconds": 6.103948099999798,
+  "database_bytes": 49922048,
+  "parquet_bytes": 3532180,
+  "sql_queries": 12,
+  "v1_v2": {
+    "v1_rows": 186251,
+    "v2_rows_in_v1_horizon": 187214,
+    "overlap_start": "2026-01-01 00:00:00",
+    "overlap_end": "2026-07-20 00:00:00",
+    "matched_keys": 186251,
+    "only_v1_keys": 0,
+    "only_v2_keys": 963,
+    "changed_values": 160674,
+    "unchanged_values": 25577,
+    "metadata_changes": 0,
+    "absolute_tolerance": 5.1e-05,
+    "changed_values_at_strict_tolerance_1e_6": 169072,
+    "v2_rows_outside_v1_horizon": 71173,
+    "maximum_absolute_change": 570556.3948741229,
+    "v1_validation": {
+      "raw_null_counts": {
+        "parameter": 0,
+        "timestamp": 0,
+        "unit": 0,
+        "value": 0,
+        "well_id": 0,
+        "well_type": 0
+      },
+      "exact_duplicates_removed": 0,
+      "conflicting_duplicate_records": 0,
+      "invalid_records": 0
+    },
+    "interpretation": "A release consistency audit, not a ground-truth accuracy test. The releases may differ in aggregation or preparation. No automatic replacement is made."
+  },
+  "benchmark": [
+    {
+      "method": "Python loop baseline",
+      "median_seconds": 0.03463790000023437,
+      "minimum_seconds": 0.024708100000680133,
+      "maximum_seconds": 0.03565549999984796,
+      "python_traced_peak_bytes": 149416,
+      "gap_intervals": 1677,
+      "missing_hours": 21014,
+      "exact_output_match": true,
+      "repeats": 3
+    },
+    {
+      "method": "Pandas groupby shift",
+      "median_seconds": 0.020407199999681325,
+      "minimum_seconds": 0.01845249999951193,
+      "maximum_seconds": 0.02193619999980001,
+      "python_traced_peak_bytes": 8795423,
+      "gap_intervals": 1677,
+      "missing_hours": 21014,
+      "exact_output_match": true,
+      "repeats": 3
+    },
+    {
+      "method": "SQLite LAG",
+      "median_seconds": 0.7091656000002331,
+      "minimum_seconds": 0.647518200000377,
+      "maximum_seconds": 0.7874406000000818,
+      "python_traced_peak_bytes": 760696,
+      "gap_intervals": 1677,
+      "missing_hours": 21014,
+      "exact_output_match": true,
+      "repeats": 3
+    }
+  ],
+  "benchmark_notes": {
+    "prepared_input_setup_seconds": 0.11080400000082591,
+    "timing_scope": "Warm computational query on prepared inputs; initial CSV parsing, common sort, record conversion, database construction/index creation are excluded. Output tuple conversion is included.",
+    "memory_scope": "tracemalloc peak Python-traced incremental allocations from a separate run; prepared inputs excluded. SQLite native allocations are not fully captured. This is not total process RSS and does not establish total-memory superiority.",
+    "ground_truth": "Exact algorithm-output equivalence on identical records, not precision/recall against verified fault labels.",
+    "repeats": 3,
+    "caution": "Hardware, Python and library versions, cache state, and input representation influence timings; this is not an end-to-end ETL benchmark."
+  },
+  "area_scale_review": [
+    {
+      "well_id": "NK-68",
+      "april_median": 15196.287433476182,
+      "may_9_31_median": 263417.79685922596,
+      "median_ratio": 17.334352091744332
+    },
+    {
+      "well_id": "NK-7",
+      "april_median": 3314.34676460541,
+      "may_9_31_median": 4136.585088558212,
+      "median_ratio": 1.2480845796624704
+    },
+    {
+      "well_id": "NK-77",
+      "april_median": 13947.312222977243,
+      "may_9_31_median": 295311.7430781944,
+      "median_ratio": 21.1733801005536
+    },
+    {
+      "well_id": "NK-82",
+      "april_median": 7452.179742502999,
+      "may_9_31_median": 113716.83411842224,
+      "median_ratio": 15.259539899426477
+    },
+    {
+      "well_id": "NK-86",
+      "april_median": 10554.263170158012,
+      "may_9_31_median": 186649.44799776515,
+      "median_ratio": 17.684744542424628
+    },
+    {
+      "well_id": "NK-91",
+      "april_median": 10510.86542687534,
+      "may_9_31_median": 216680.61444381668,
+      "median_ratio": 20.61491662615942
+    },
+    {
+      "well_id": "NK-93",
+      "april_median": 4502.421260067239,
+      "may_9_31_median": 62994.2360616581,
+      "median_ratio": 13.991191055436103
+    }
+  ],
+  "nk7_regime_review": [
+    {
+      "regime": "NK7_from_June",
+      "observations": 2880,
+      "median_spm": 1.4044285714285714,
+      "zero_hours": 151,
+      "zero_percent": 5.243055555555555
+    },
+    {
+      "regime": "original",
+      "observations": 3540,
+      "median_spm": 4.163378453680437,
+      "zero_hours": 369,
+      "zero_percent": 10.423728813559322
+    }
+  ],
+  "python_version": "3.12.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "library_versions": {
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "pyarrow": "22.0.0"
+  },
+  "source_revisions": {
+    "v1": "84e5103cef58c85dc924e4b47aaed8ef2c5cb3dd",
+    "v2": "4004bb78ca8811a87c2892a89e457c59d22ace2b"
+  },
+  "pipeline_seconds_before_figures": 25.74565799999982,
+  "limitations": [
+    "The provider assigned year 2026 from monthly source-file order; original SCADA timestamps should verify it.",
+    "Source flags refer to raw records before hourly averaging; they are preserved rather than regenerated from hourly values.",
+    "There are no verified equipment-failure labels; no fault-detection precision or recall is claimed.",
+    "Area scale changes and the NK-7 regime shift require interpretation; no unverified calibration correction was applied.",
+    "Tracemalloc excludes much native allocation; memory results are Python-traced allocations, not total RSS.",
+    "The complete final table fits memory; chunked CSV reading does not make every analysis out of core.",
+    "Missing cells in a wide table include structurally inapplicable parameters; coverage uses only the 43 active series."
+  ]
+}

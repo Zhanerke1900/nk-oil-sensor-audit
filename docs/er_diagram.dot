@@ -1,0 +1,18 @@
+digraph Database {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.28", dpi=170];
+  node [shape=record, fontname="DejaVu Sans", fontsize=12, color="#7C8992", style="filled", fillcolor="#F5F7F8", margin="0.16,0.10"];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#436978", arrowsize=0.7];
+  wells [label="{wells|PK well_id\lwell_type\l}"];
+  parameters [label="{parameters|PK parameter\lunit\lapplicable_well_type\l}"];
+  well_parameters [label="{well_parameters|PK, FK well_id\lPK, FK parameter\l}"];
+  observations [label="{observations|PK observation_id\lFK well_id + parameter\ltimestamp\lvalue, n_obs\lsplit, original flag\lregime, scale_period\lscale_review\l}", fillcolor="#E5F0F1"];
+  flags [label="{flags|PK flag_name\l}"];
+  observation_flags [label="{observation_flags|PK, FK observation_id\lPK, FK flag_name\l}"];
+  wells -> well_parameters [label="1 to many"];
+  parameters -> well_parameters [label="1 to many"];
+  well_parameters -> observations [label="1 to many"];
+  observations -> observation_flags [label="1 to many"];
+  flags -> observation_flags [label="1 to many"];
+  {rank=same; wells; parameters;}
+  {rank=same; observations; flags;}
+}
