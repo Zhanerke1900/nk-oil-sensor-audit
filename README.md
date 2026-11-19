@@ -189,6 +189,8 @@ database structure. The **12 analytical SQL queries** use joins, aggregates,
 functions such as `LAG()`. Their results are loaded into Pandas and saved
 under `outputs/sql/`, where they can also be viewed in the dashboard.
 
+See the [SQL query guide in Russian](docs/SQL_GUIDE_RU.md) for questions and result interpretation.
+
 ## Data sources and limitations
 
 The v2 dataset and earlier v1 release were published by Arailym Tleubayeva:
