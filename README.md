@@ -66,8 +66,13 @@ From the project directory, with the virtual environment activated (or replace
 ```bash
 python main.py --menu     # Interactive console operations
 python main.py --sql      # Re-export results of the 12 SQL queries
+python main.py --summary  # Inspect saved results without rerunning ETL
 python -m unittest discover -s tests -v
 ```
+
+`--summary` reads `outputs/summary.json` without rerunning the pipeline or updating
+benchmark times. It does not generate the data files required by the dashboard;
+use `python main.py --run` to build those files first.
 
 `walkthrough.ipynb` describes the processing workflow and runs in Jupyter or
 Google Colab using the same Python modules as the command-line program.
