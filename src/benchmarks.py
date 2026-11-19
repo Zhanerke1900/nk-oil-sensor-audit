@@ -44,6 +44,8 @@ def sqlite_gaps(connection):
 
 
 def benchmark_gaps(frame, repeats=3):
+    if isinstance(repeats, bool) or not isinstance(repeats, int) or repeats < 1:
+        raise ValueError("Benchmark repeats must be a positive integer")
     started = time.perf_counter()
     # Prepared representations and database creation are deliberately not timed.
     # They have different purposes and are reported separately by the pipeline.
