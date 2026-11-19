@@ -47,6 +47,7 @@ def sha256_file(path: Path) -> str:
 
 
 def download_one(item: dict, directory: Path, force: bool = False) -> dict:
+    directory.mkdir(parents=True, exist_ok=True)
     destination = directory / item["file"]
     url = (f"https://huggingface.co/datasets/{item['repo']}/resolve/"
            f"{item['revision']}/{item['source_file']}")

@@ -27,6 +27,19 @@ class DownloadChecks(unittest.TestCase):
             urlopen.assert_not_called()
             self.assertEqual(result["size_bytes"], len(b"small example"))
 
+    def test_download_creates_missing_destination_directory(self):
+        from io import BytesIO
+        with tempfile.TemporaryDirectory() as parent:
+            directory = Path(parent) / "new" / "raw"
+            payload = b"timestamp,value\n2026-01-01,3\n"
+            item = {"file": "measurements.csv", "repo": "unused/repo",
+                    "revision": "abc", "source_file": "measurements.csv",
+                    "sha256": hashlib.sha256(payload).hexdigest()}
+            with patch("urllib.request.urlopen", return_value=BytesIO(payload)):
+                download_one(item, directory)
+            self.assertEqual((directory / "measurements.csv").read_bytes(), payload)
+            self.assertFalse((directory / "measurements.csv.part").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
