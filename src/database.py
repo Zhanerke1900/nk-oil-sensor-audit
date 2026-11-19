@@ -201,6 +201,10 @@ FROM observations GROUP BY split ORDER BY first_time;
 
 
 def export_queries():
+    if not DB_PATH.is_file():
+        raise FileNotFoundError("SQLite database missing. Run python main.py --run first.")
+    SQL_DIR.mkdir(parents=True, exist_ok=True)
+    (OUTPUT / "sql").mkdir(parents=True, exist_ok=True)
     outputs = {}
     with closing(sqlite3.connect(DB_PATH)) as conn:
         for name, sql in query_definitions().items():
