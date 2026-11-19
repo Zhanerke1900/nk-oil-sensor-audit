@@ -9,6 +9,8 @@ from .ingestion import read_chunks, validate_frame
 def coverage_table(frame, start=START, end=END, pairs=None):
     """Count absent hourly rows, including both ends of the declared horizon."""
     start, end = pd.Timestamp(start), pd.Timestamp(end)
+    if start > end:
+        raise ValueError("Coverage start must not be after end")
     pairs = active_pairs() if pairs is None else pairs
     expected_hours = int((end - start) / pd.Timedelta(hours=1)) + 1
     part = frame[frame["timestamp"].between(start, end)]
