@@ -11,6 +11,8 @@ def read_chunks(path, chunksize=50000):
     This is chunked ingestion, not a claim that the complete pipeline is out of
     core. The final 258K-row table is deliberately materialized for analysis.
     """
+    if isinstance(chunksize, bool) or not isinstance(chunksize, int) or chunksize < 1:
+        raise ValueError("chunksize must be a positive integer")
     if not path.exists():
         raise FileNotFoundError(f"Missing {path.name}. Run python download.py first.")
     chunks = []
