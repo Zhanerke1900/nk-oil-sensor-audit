@@ -78,7 +78,7 @@
     "largest_parsed_chunk_bytes": 17476529,
     "chunksize": 50000,
     "memory_measurement": "DataFrame.memory_usage(deep=True); same validated columns before/after dtype optimization; derived audit fields excluded",
-    "loading_seconds": 3.181570799999463
+    "loading_seconds": 0.7639432500582188
   },
   "splits": [
     {
@@ -100,9 +100,9 @@
       "flagged_rows": 3463
     }
   ],
-  "database_build_seconds": 6.103948099999798,
+  "database_build_seconds": 0.9511551251634955,
   "database_bytes": 49922048,
-  "parquet_bytes": 3532180,
+  "parquet_bytes": 3541038,
   "sql_queries": 12,
   "v1_v2": {
     "v1_rows": 186251,
@@ -137,9 +137,9 @@
   "benchmark": [
     {
       "method": "Python loop baseline",
-      "median_seconds": 0.03463790000023437,
-      "minimum_seconds": 0.024708100000680133,
-      "maximum_seconds": 0.03565549999984796,
+      "median_seconds": 0.008536875015124679,
+      "minimum_seconds": 0.008520875126123428,
+      "maximum_seconds": 0.008582457900047302,
       "python_traced_peak_bytes": 149416,
       "gap_intervals": 1677,
       "missing_hours": 21014,
@@ -148,10 +148,10 @@
     },
     {
       "method": "Pandas groupby shift",
-      "median_seconds": 0.020407199999681325,
-      "minimum_seconds": 0.01845249999951193,
-      "maximum_seconds": 0.02193619999980001,
-      "python_traced_peak_bytes": 8795423,
+      "median_seconds": 0.005051916930824518,
+      "minimum_seconds": 0.00495145795866847,
+      "maximum_seconds": 0.005490042036399245,
+      "python_traced_peak_bytes": 8795529,
       "gap_intervals": 1677,
       "missing_hours": 21014,
       "exact_output_match": true,
@@ -159,9 +159,9 @@
     },
     {
       "method": "SQLite LAG",
-      "median_seconds": 0.7091656000002331,
-      "minimum_seconds": 0.647518200000377,
-      "maximum_seconds": 0.7874406000000818,
+      "median_seconds": 0.19489545794203877,
+      "minimum_seconds": 0.19379745796322823,
+      "maximum_seconds": 0.1958614168688655,
       "python_traced_peak_bytes": 760696,
       "gap_intervals": 1677,
       "missing_hours": 21014,
@@ -170,7 +170,7 @@
     }
   ],
   "benchmark_notes": {
-    "prepared_input_setup_seconds": 0.11080400000082591,
+    "prepared_input_setup_seconds": 0.02861745818518102,
     "timing_scope": "Warm computational query on prepared inputs; initial CSV parsing, common sort, record conversion, database construction/index creation are excluded. Output tuple conversion is included.",
     "memory_scope": "tracemalloc peak Python-traced incremental allocations from a separate run; prepared inputs excluded. SQLite native allocations are not fully captured. This is not total process RSS and does not establish total-memory superiority.",
     "ground_truth": "Exact algorithm-output equivalence on identical records, not precision/recall against verified fault labels.",
@@ -237,8 +237,8 @@
       "zero_percent": 10.423728813559322
     }
   ],
-  "python_version": "3.12.0",
-  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.2",
+  "platform": "macOS-26.0.1-arm64-arm-64bit",
   "library_versions": {
     "pandas": "2.2.3",
     "numpy": "2.3.5",
@@ -248,7 +248,7 @@
     "v1": "84e5103cef58c85dc924e4b47aaed8ef2c5cb3dd",
     "v2": "4004bb78ca8811a87c2892a89e457c59d22ace2b"
   },
-  "pipeline_seconds_before_figures": 25.74565799999982,
+  "pipeline_seconds_before_figures": 17.1120789158158,
   "limitations": [
     "The provider assigned year 2026 from monthly source-file order; original SCADA timestamps should verify it.",
     "Source flags refer to raw records before hourly averaging; they are preserved rather than regenerated from hourly values.",

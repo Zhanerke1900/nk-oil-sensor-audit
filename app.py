@@ -18,6 +18,23 @@ REQUIRED = {
     "well_id", "well_type", "timestamp", "parameter", "value", "unit",
     "n_obs", "flag", "split",
 }
+PARAMETER_DESCRIPTIONS = {
+    "SPM": "SPM (strokes per minute) — число ходов насоса в минуту.",
+    "pump_fillage": "Заполнение насоса — степень заполнения насоса жидкостью.",
+    "min_rod_weight": "Минимальная нагрузка на штангу за цикл работы насоса.",
+    "max_rod_weight": "Максимальная нагрузка на штангу за цикл работы насоса.",
+    "dynamometer_area": "Площадь динамограммы — диаграммы нагрузки на штангу в зависимости от её перемещения. В источнике указана как безразмерная; причина изменения масштаба в мае 2026 года не подтверждена.",
+    "tubing_pressure": "Давление в насосно-компрессорных трубах (НКТ).",
+    "casing_pressure": "Давление в затрубном пространстве.",
+    "line_pressure": "Давление в выкидной линии скважины.",
+}
+UNIT_DESCRIPTIONS = {
+    "strokes/min": "ходов в минуту",
+    "%": "проценты",
+    "kg": "килограммы (обозначение нагрузки в источнике)",
+    "atm": "атмосферы",
+    "unitless": "безразмерная величина по данным источника",
+}
 
 
 @st.cache_data(show_spinner=False)
@@ -134,6 +151,9 @@ def main():
     parameters = sorted(well_data["parameter"].astype(str).unique())
     parameter = st.sidebar.selectbox("Параметр", parameters,
                                      index=parameters.index("SPM") if "SPM" in parameters else 0)
+    unit = well_data.loc[well_data["parameter"] == parameter, "unit"].astype(str).iloc[0]
+    st.sidebar.caption(PARAMETER_DESCRIPTIONS.get(parameter, parameter))
+    st.sidebar.caption(f"Единица: {unit} — {UNIT_DESCRIPTIONS.get(unit, unit)}.")
     first, last = data["timestamp"].min(), data["timestamp"].max()
     dates = st.sidebar.date_input("Период", value=(first.date(), last.date()),
                                   min_value=first.date(), max_value=last.date())
@@ -165,17 +185,21 @@ def main():
     shown = observed if flag_filter == "Все значения" else observed.loc[
         ~flagged if flag_filter == "Без флагов" else flagged
     ]
-    metrics = st.columns(4)
+    metrics = st.columns(5)
     for column, label, value in zip(metrics,
         ["Ожидаемые часы", "Наблюдаемые часы", "Отсутствующие часы", "Строки с флагами"],
         [len(grid), int(grid["record_present"].sum()), int((~grid["record_present"]).sum()), int(flagged.sum())]):
         column.metric(label, f"{value:,}")
+    completeness = 100 * grid["record_present"].sum() / len(grid)
+    metrics[4].metric(
+        "Полнота данных", f"{completeness:.2f}%".replace(".", ","),
+        help="Наблюдаемые часы / ожидаемые часы × 100%. Фильтр флагов не влияет на полноту.",
+    )
     st.caption("Полнота рассчитана до фильтрации по флагам, для одной выбранной пары скважина–параметр.")
     chart_tab, gap_tab, flag_tab, sql_tab, method_tab = st.tabs(
         ["Временной ряд", "Пропуски", "Флаги качества", "SQL", "Сравнение методов"])
 
     with chart_tab:
-        unit = well_data.loc[well_data["parameter"] == parameter, "unit"].astype(str).iloc[0]
         values = shown.set_index("timestamp")["value"].reindex(grid.index)
         figure = go.Figure(go.Scatter(x=values.index, y=values, mode="lines",
                                       name=parameter, connectgaps=False, line={"color": "#176B87", "width": 1}))

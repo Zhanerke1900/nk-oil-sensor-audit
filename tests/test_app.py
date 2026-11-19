@@ -42,15 +42,15 @@ app.main()
     def test_flag_filter_preserves_coverage_and_boundary_gaps(self):
         app = AppTest.from_string(self.script, default_timeout=30).run()
         self.assertFalse(app.exception)
-        self.assertEqual([m.value for m in app.metric], ["6", "3", "3", "1"])
+        self.assertEqual([m.value for m in app.metric], ["6", "3", "3", "1", "50,00%"])
         flag_choice = next(s for s in app.sidebar.selectbox if s.label == "Флаги на графике")
         flag_choice.select("Только с флагами").run()
         self.assertFalse(app.exception)
-        self.assertEqual([m.value for m in app.metric], ["6", "3", "3", "1"])
+        self.assertEqual([m.value for m in app.metric], ["6", "3", "3", "1", "50,00%"])
         split_choice = next(s for s in app.sidebar.selectbox if s.label == "Выборка")
         split_choice.select("test").run()
         self.assertFalse(app.exception)
-        self.assertEqual([m.value for m in app.metric], ["3", "1", "2", "1"])
+        self.assertEqual([m.value for m in app.metric], ["3", "1", "2", "1", "33,33%"])
 
     def test_structurally_absent_parameter_is_not_offered(self):
         app = AppTest.from_string(self.script, default_timeout=30).run()

@@ -2,9 +2,9 @@ observation_id,well_id,parameter,timestamp,value,flag_count,individual_flags
 40765,NK-7,dynamometer_area,2026-06-13 11:00:00,-608698.3010741229,2,area_extreme;area_negative
 40885,NK-7,dynamometer_area,2026-06-18 14:00:00,-145621.39961503158,2,area_extreme;area_negative
 41560,NK-7,dynamometer_area,2026-07-19 19:00:00,14445.801678134192,2,area_extreme;area_negative
-178712,NK-86,dynamometer_area,2026-07-21 13:00:00,-189005.74581701652,2,area_extreme;area_negative
+178712,NK-86,dynamometer_area,2026-07-21 13:00:00,-189005.74581701655,2,area_extreme;area_negative
 178713,NK-86,dynamometer_area,2026-07-21 14:00:00,-952639.9265367786,2,area_extreme;area_negative
-178714,NK-86,dynamometer_area,2026-07-21 15:00:00,-435409.7246439231,2,area_extreme;area_negative
+178714,NK-86,dynamometer_area,2026-07-21 15:00:00,-435409.72464392305,2,area_extreme;area_negative
 178715,NK-86,dynamometer_area,2026-07-21 16:00:00,-1496768.5883075488,2,area_extreme;area_negative
 178716,NK-86,dynamometer_area,2026-07-21 17:00:00,-1461539.8664999213,2,area_extreme;area_negative
 41678,NK-7,dynamometer_area,2026-07-24 17:00:00,-230741.0093027451,2,area_extreme;area_negative
@@ -14,9 +14,9 @@ observation_id,well_id,parameter,timestamp,value,flag_count,individual_flags
 178995,NK-86,dynamometer_area,2026-08-02 09:00:00,322799.0562584021,2,area_extreme;area_negative
 178999,NK-86,dynamometer_area,2026-08-02 13:00:00,290897.0088099784,2,area_extreme;area_negative
 179000,NK-86,dynamometer_area,2026-08-02 14:00:00,-838084.2961923248,2,area_extreme;area_negative
-179002,NK-86,dynamometer_area,2026-08-02 16:00:00,-310604.08711308,2,area_extreme;area_negative
+179002,NK-86,dynamometer_area,2026-08-02 16:00:00,-310604.08711307996,2,area_extreme;area_negative
 179003,NK-86,dynamometer_area,2026-08-02 17:00:00,-691252.1166390629,2,area_extreme;area_negative
-179004,NK-86,dynamometer_area,2026-08-02 18:00:00,-191093.46098095237,2,area_extreme;area_negative
+179004,NK-86,dynamometer_area,2026-08-02 18:00:00,-191093.4609809523,2,area_extreme;area_negative
 179020,NK-86,dynamometer_area,2026-08-03 10:00:00,-649424.9251564582,2,area_extreme;area_negative
 179065,NK-86,dynamometer_area,2026-08-05 13:00:00,-734450.9712131497,2,area_extreme;area_negative
 179066,NK-86,dynamometer_area,2026-08-05 14:00:00,-1086446.733817035,2,area_extreme;area_negative
@@ -33,7 +33,7 @@ observation_id,well_id,parameter,timestamp,value,flag_count,individual_flags
 179590,NK-86,dynamometer_area,2026-08-27 15:00:00,-403820.68594072206,2,area_extreme;area_negative
 179877,NK-86,dynamometer_area,2026-09-08 15:00:00,-575045.6161868034,2,area_extreme;area_negative
 42786,NK-7,dynamometer_area,2026-09-10 14:00:00,213510.05747024668,2,area_extreme;area_negative
-179946,NK-86,dynamometer_area,2026-09-11 12:00:00,-423809.3596639352,2,area_extreme;area_negative
+179946,NK-86,dynamometer_area,2026-09-11 12:00:00,-423809.35966393515,2,area_extreme;area_negative
 179947,NK-86,dynamometer_area,2026-09-11 13:00:00,-331216.7098403195,2,area_extreme;area_negative
 179950,NK-86,dynamometer_area,2026-09-11 16:00:00,-611792.1018804366,2,area_extreme;area_negative
 179967,NK-86,dynamometer_area,2026-09-12 09:00:00,-79019.52186374798,2,area_extreme;area_negative
@@ -57,7 +57,7 @@ observation_id,well_id,parameter,timestamp,value,flag_count,individual_flags
 180119,NK-86,dynamometer_area,2026-09-20 17:00:00,-398214.8650746249,2,area_extreme;area_negative
 180120,NK-86,dynamometer_area,2026-09-20 18:00:00,-910644.7793813652,2,area_extreme;area_negative
 180136,NK-86,dynamometer_area,2026-09-21 10:00:00,-772607.1927011937,2,area_extreme;area_negative
-180137,NK-86,dynamometer_area,2026-09-21 11:00:00,-244872.8337703152,2,area_extreme;area_negative
+180137,NK-86,dynamometer_area,2026-09-21 11:00:00,-244872.83377031516,2,area_extreme;area_negative
 180138,NK-86,dynamometer_area,2026-09-21 12:00:00,149732.44099384488,2,area_extreme;area_negative
 180139,NK-86,dynamometer_area,2026-09-21 13:00:00,-610361.3547396004,2,area_extreme;area_negative
 180141,NK-86,dynamometer_area,2026-09-21 15:00:00,-562309.4310737166,2,area_extreme;area_negative
@@ -67,7 +67,7 @@ observation_id,well_id,parameter,timestamp,value,flag_count,individual_flags
 180165,NK-86,dynamometer_area,2026-09-22 15:00:00,-286902.6169482273,2,area_extreme;area_negative
 180166,NK-86,dynamometer_area,2026-09-22 16:00:00,-613192.7197654822,2,area_extreme;area_negative
 180168,NK-86,dynamometer_area,2026-09-22 18:00:00,292990.8831078252,2,area_extreme;area_negative
-180351,NK-86,dynamometer_area,2026-09-30 09:00:00,-500592.8504005853,2,area_extreme;area_negative
+180351,NK-86,dynamometer_area,2026-09-30 09:00:00,-500592.85040058533,2,area_extreme;area_negative
 180352,NK-86,dynamometer_area,2026-09-30 10:00:00,-1694334.747336521,2,area_extreme;area_negative
 180353,NK-86,dynamometer_area,2026-09-30 11:00:00,-578986.1975031927,2,area_extreme;area_negative
 180354,NK-86,dynamometer_area,2026-09-30 12:00:00,-645031.3935771142,2,area_extreme;area_negative
