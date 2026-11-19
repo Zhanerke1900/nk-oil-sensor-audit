@@ -1,5 +1,7 @@
 # Sensor Data Quality Audit and ETL Pipeline
 
+[![Python tests](https://github.com/Zhanerke1900/nk-oil-sensor-audit/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/Zhanerke1900/nk-oil-sensor-audit/actions/workflows/tests.yml)
+
 **Final Project 19 · Programming for Data Analysis and Database**  
 **Team:** Amina Tuzelova, Alua Nurlybekova, Zhanerke Pernesh  
 **Group:** AAI-2606M
@@ -109,6 +111,7 @@ offline, without running Streamlit.
 | `outputs/` | Audit tables, benchmark data, figures, and processing summary |
 | `walkthrough.ipynb` | Notebook with exploration of data and results |
 | `docs/er_diagram.png`, `docs/er_diagram.mmd` | Database ER diagram |
+| [docs/DASHBOARD_GUIDE_RU.md](docs/DASHBOARD_GUIDE_RU.md) | Dashboard demonstration guide in Russian |
 | `docs/report.docx` | Written report |
 | `docs/presentation.pptx` | Editable presentation |
 | `DATA_SOURCES.md` | Data source links, attribution, and revision information |
