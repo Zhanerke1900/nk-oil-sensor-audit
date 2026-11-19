@@ -53,6 +53,7 @@ def main():
     group.add_argument("--run", action="store_true", help="Run all reproducible analyses (default)")
     group.add_argument("--sql", action="store_true", help="Re-export SQL query results from existing database")
     group.add_argument("--menu", action="store_true", help="Open interactive console menu")
+    group.add_argument("--summary", action="store_true", help="Show the saved audit summary without re-running ETL")
     args = parser.parse_args()
     try:
         if args.menu:
@@ -62,6 +63,11 @@ def main():
                 raise FileNotFoundError("Database missing. Run python main.py --run first.")
             export_queries()
             print("12 SQL result tables written to outputs/sql.")
+        elif args.summary:
+            summary_file = OUTPUT / "summary.json"
+            if not summary_file.exists():
+                raise FileNotFoundError("Saved summary missing. Run python main.py --run first.")
+            show_summary(json.loads(summary_file.read_text(encoding="utf-8")))
         else:
             execute()
     except (FileNotFoundError, ValueError, OSError, sqlite3.DatabaseError) as exc:
