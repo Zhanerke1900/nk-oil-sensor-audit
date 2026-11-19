@@ -74,6 +74,15 @@ Google Colab using the same Python modules as the command-line program.
 Open `outputs/interactive_spm.html` in a browser to view the saved Plotly chart
 offline, without running Streamlit.
 
+## Dashboard features
+
+- Filter measurements by well, parameter, date range, and train/test split.
+- View expected, observed, and missing hours, flagged rows, and data completeness.
+- Completeness is calculated as observed hours / expected hours × 100% for the
+  selected well, parameter, period, and split, and is unaffected by the flag filter.
+- Read parameter descriptions and measurement units in the sidebar.
+- Explore time series, missing data, quality flags, saved SQL results, and method comparisons.
+
 ## Project files
 
 | Path | Purpose |
