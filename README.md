@@ -76,6 +76,8 @@ python -m unittest discover -s tests -v
 benchmark times. It does not generate the data files required by the dashboard;
 use `python main.py --run` to build those files first.
 
+For setup and launch errors, see the [troubleshooting guide in Russian](docs/TROUBLESHOOTING_RU.md).
+
 `walkthrough.ipynb` describes the processing workflow and runs in Jupyter or
 Google Colab using the same Python modules as the command-line program.
 Open `outputs/interactive_spm.html` in a browser to view the saved Plotly chart
