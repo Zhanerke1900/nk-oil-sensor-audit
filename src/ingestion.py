@@ -33,6 +33,8 @@ def validate_frame(frame, version="v2"):
     missing = required - set(frame.columns)
     if missing:
         raise ValueError(f"Missing columns: {sorted(missing)}")
+    if frame.empty:
+        raise ValueError("No sensor observations to validate")
     result = frame.copy()
     null_counts = {col: int(result[col].isna().sum()) for col in sorted(required)}
     # An empty flag means no source flag. It is not an unknown sensor reading.

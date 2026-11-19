@@ -2,7 +2,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from src.ingestion import read_chunks
+import pandas as pd
+from src.ingestion import read_chunks, validate_frame
 
 
 class IngestionChecks(unittest.TestCase):
@@ -19,6 +20,12 @@ class IngestionChecks(unittest.TestCase):
             frame, largest_chunk_bytes = read_chunks(path, chunksize=1)
         self.assertEqual(frame["value"].tolist(), [1, 2])
         self.assertGreater(largest_chunk_bytes, 0)
+
+    def test_empty_measurement_file_is_rejected(self):
+        columns = ["well_id", "well_type", "timestamp", "parameter", "value",
+                   "unit", "n_obs", "flag"]
+        with self.assertRaisesRegex(ValueError, "No sensor observations"):
+            validate_frame(pd.DataFrame(columns=columns))
 
 
 if __name__ == "__main__":
