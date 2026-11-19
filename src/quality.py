@@ -46,7 +46,10 @@ def source_flag_tables(frame):
     flagged = frame.loc[frame["flag"].astype(str).ne(""),
                         ["observation_id", "well_id", "parameter", "timestamp", "split", "flag"]].copy()
     flagged["flag_name"] = flagged["flag"].astype(str).str.split(";")
-    exploded = flagged.explode("flag_name").drop_duplicates(["observation_id", "flag_name"])
+    exploded = flagged.explode("flag_name")
+    exploded["flag_name"] = exploded["flag_name"].astype("string").str.strip()
+    exploded = exploded.loc[exploded["flag_name"].notna() & exploded["flag_name"].ne("")]
+    exploded = exploded.drop_duplicates(["observation_id", "flag_name"])
     counts = exploded.groupby(["well_id", "flag_name"], observed=True).size().rename("flag_occurrences").reset_index()
     return exploded, counts
 
