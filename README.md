@@ -1,32 +1,33 @@
 # Sensor Data Quality Audit and ETL Pipeline
 
-**Final project 19 · Programming for Data Analysis and Database**  
+**Final Project 19 · Programming for Data Analysis and Database**  
 **Team:** Amina Tuzelova, Alua Nurlybekova, Zhanerke Pernesh  
 **Group:** AAI-2606M
 
 This Python project audits the NK Oil Well Sensor Monitoring v2 dataset, compares
-it with v1, and loads the validated observations into a normalized SQLite
-database. It includes a Streamlit dashboard, an offline Plotly chart, an English
-report and a presentation. Russian start and defense notes are in `docs/`.
+it with v1, and loads validated observations into a normalized SQLite database.
+It includes a Streamlit dashboard, an offline interactive Plotly chart, a written
+report, and a presentation.
 
 ## Main findings
 
-- 258,387 observed measurements across 10 wells and 43 applicable sensor series.
-- 23,349 absent hourly measurements out of 281,736 expected, or **8.29%**.
-- 7,041 source-flagged rows, or **2.72%** of observed rows.
-- Interior gaps account for 21,014 missing hours. Boundary gaps account for 2,335.
+- **258,387 recorded measurements** across 10 wells and 43 applicable sensor series.
+- **23,349 missing hourly measurements** out of 281,736 expected (**8.29%**).
+- **7,041 source-flagged rows** (**2.72%** of recorded measurements).
+- Interior gaps account for 21,014 missing hours; boundary gaps account for 2,335.
 - All 186,251 v1 observation keys remain in v2. Within the v1 time horizon, v2
   adds 963 keys and changes 160,674 matched values beyond an absolute tolerance
-  of 0.000051. This is a release-consistency finding, not an accuracy score.
-- Python, Pandas and SQLite detect exactly the same 1,677 interior gap intervals.
+  of 0.000051. This measures agreement between dataset releases, not sensor accuracy.
+- Python, Pandas, and SQLite identify the same **1,677 interior gap intervals**.
 
-These are measured outputs from the included source snapshot. Runtime values in
-`outputs/benchmark.csv` are specific to the recorded execution environment.
+These results were calculated from the dataset revisions listed in
+[`DATA_SOURCES.md`](DATA_SOURCES.md). Execution times in
+`outputs/benchmark.csv` depend on the machine and runtime environment.
 
 ## Quick start on Windows PowerShell
 
-Install **Python 3.12** first. Extract the ZIP and open a terminal in this folder
-(the folder containing `main.py`). Run:
+Install **Python 3.12** and open a terminal in the project directory (the folder
+containing `main.py`):
 
 ```powershell
 py -3.12 -m venv .venv
@@ -36,11 +37,12 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-The download step verifies existing raw CSV files in the complete ZIP. When they
-are absent, it downloads the public sources at fixed revisions. The program
-prints a local dashboard URL, normally `http://localhost:8501`. Keep the terminal
-open and press `Ctrl+C` to stop the dashboard. Virtual-environment activation is
-unnecessary, so no PowerShell execution-policy change is required.
+`download.py` verifies existing source CSVs when present, or downloads the public
+sources at pinned revisions and checks their SHA-256 hashes. The Streamlit
+command prints the dashboard URL (normally `http://localhost:8501`). Keep the
+terminal open while using the dashboard; press `Ctrl+C` to stop it. Activation
+of the virtual environment is optional because the commands use its Python
+executable directly.
 
 ## Linux or macOS
 
@@ -52,126 +54,139 @@ python3.12 -m venv .venv
 .venv/bin/python -m streamlit run app.py
 ```
 
-Dependencies are listed with exact versions in `requirements.txt`. The pipeline
-was executed on Python 3.12.14, pandas 2.2.3 and SQLite from the Python runtime.
-No database server, password or API key is needed.
+Library versions are pinned in `requirements.txt`. The pipeline was executed
+using Python 3.12.14, pandas 2.2.3, and SQLite provided by the Python runtime.
+No separate database server, password, or API key is required.
 
 ## Other ways to use the project
 
+From the project directory, with the virtual environment activated (or replace
+`python` with the virtual environment's Python executable):
+
 ```bash
-python main.py --menu    # Interactive console operations
-python main.py --sql     # Re-export the 12 analytical SQL results
+python main.py --menu     # Interactive console operations
+python main.py --sql      # Re-export results of the 12 SQL queries
 python -m unittest discover -s tests -v
 ```
 
-`walkthrough.ipynb` explains the workflow and can run in Jupyter or Google Colab.
-The notebook uses the same modules as the command-line program. Open
-`outputs/interactive_spm.html` in a browser to inspect the saved interactive
-chart offline, without Streamlit or a Python installation.
+`walkthrough.ipynb` describes the processing workflow and runs in Jupyter or
+Google Colab using the same Python modules as the command-line program.
+Open `outputs/interactive_spm.html` in a browser to view the saved Plotly chart
+offline, without running Streamlit.
 
 ## Project files
 
 | Path | Purpose |
 |---|---|
-| `download.py` | Pinned source downloads and SHA-256 validation |
+| `download.py` | Pinned source downloads and SHA-256 verification |
 | `main.py` | Command-line entry point and interactive console menu |
-| `src/ingestion.py` | Chunked reading, schema checks, official split validation, dtype optimization |
-| `src/quality.py` | Hourly completeness, flags, train-only IQR, daily and hourly descriptive summaries |
+| `src/ingestion.py` | Chunked reading, schema validation, split checks, data-type optimization |
+| `src/quality.py` | Hourly completeness, source flags, train-only IQR, descriptive summaries |
 | `src/database.py` | Normalized schema and 12 SQL queries |
-| `src/benchmarks.py` | Equivalent gap-detection methods and measured timing |
-| `src/pipeline.py` | Reproducible orchestration and result export |
-| `src/visualization.py` | Six static figures and the offline Plotly chart |
-| `app.py` | Dashboard filters, charts and SQL result viewer |
-| `data/raw/` | Unmodified source CSVs, source cards and checksum manifest |
-| `data/processed/observations.parquet` | Validated long-format data with audit annotations |
-| `data/processed/wide.parquet` | Hourly wide representation for analysis |
-| `data/processed/wells.db` | SQLite database |
-| `sql/` | Schema and executable analytical queries |
-| `outputs/` | Audit tables, benchmark, figures and actual run summary |
+| `src/benchmarks.py` | Three equivalent gap-detection methods and runtime/memory measurements |
+| `src/pipeline.py` | Processing pipeline and export of results |
+| `src/visualization.py` | Six static figures and an interactive Plotly chart |
+| `app.py` | Dashboard filters, charts, and SQL result viewer |
+| `data/raw/` | Source CSVs, source descriptions, and checksums (downloaded locally) |
+| `data/processed/observations.parquet` | Validated long-format data with audit annotations (generated) |
+| `data/processed/wide.parquet` | Hourly wide-format data (generated) |
+| `data/processed/wells.db` | SQLite database (generated) |
+| `sql/` | Database schema and analytical SQL queries |
+| `outputs/` | Audit tables, benchmark data, figures, and processing summary |
+| `walkthrough.ipynb` | Notebook with exploration of data and results |
+| `docs/er_diagram.png`, `docs/er_diagram.mmd` | Database ER diagram |
 | `docs/report.docx` | Written report |
 | `docs/presentation.pptx` | Editable presentation |
-| `docs/START_HERE_RU.md` | Short Russian run instructions |
-| `docs/DEFENSE_RU.md` | Project explanation and likely defense questions |
-| `docs/TEAM_CONTRIBUTIONS.md` | Proposed division of work to confirm |
+| `DATA_SOURCES.md` | Data source links, attribution, and revision information |
+
+Generated CSV, Parquet, and SQLite files can be recreated by `download.py` and
+`main.py --run` and do not need to be committed to the repository.
 
 ## Audit rules
 
-The observation key is `(well_id, parameter, timestamp)`. The pipeline rejects
-invalid schemas, inconsistent units, non-hourly times and conflicting duplicate
-keys. It removes exact duplicate records only if present. The supplied files
-contain no duplicates or missing numeric values in existing rows.
+The unique observation key is `(well_id, parameter, timestamp)`. The pipeline
+checks the input schema, measurement units, hourly timestamps, and duplicate
+keys. It rejects conflicting records and removes exact duplicates if any are
+found. The source snapshots contain no duplicate keys or missing numeric values
+in existing measurement rows.
 
-Missingness is measured against the documented hourly horizon, January 1 through
-September 30, 2026. Only applicable well–parameter pairs enter the denominator.
-For example, NK-76 does not record casing pressure. Wide-table structural nulls
-must not be counted as data loss. Ordinary SQL `LAG` finds only interior gaps,
-so the pipeline separately checks leading and trailing gaps.
+Missingness is evaluated against the documented hourly period from **January 1
+to September 30, 2026**, considering only the well–sensor pairs for which a
+measurement is applicable. For example, NK-76 does not record casing pressure.
+Nulls for structurally inapplicable sensors in the wide table do not represent
+missing measurements. SQL `LAG()` detects gaps between recorded observations;
+leading and trailing gaps are counted separately.
 
-Source flags are computed before hourly aggregation and can describe an hourly
-mean that does not exceed the corresponding raw threshold. The original flag
-string and normalized individual flags are both retained. Compound categories
-overlap. Zero readings remain in the dataset. The program performs no automatic
-imputation, outlier deletion or guessed scale correction.
+Source quality flags are computed before hourly aggregation. A flagged hourly
+observation may have a mean value that does not itself exceed the threshold
+that triggered a flag. The original flag string and normalized individual flags
+are preserved. Compound flag categories may overlap. Zero readings are kept.
+The pipeline does not automatically impute missing measurements, remove
+outliers, or alter values to compensate for the known scale change.
 
-Scale-period and NK-7 regime fields annotate known concerns. An IQR rule fitted
-on the official training interval provides separate statistical screening.
-Those review flags do not establish equipment failure. Descriptive plots use the
-full period and do not train a forecasting model.
+The audit marks the reported **May 2026 change in `dynamometer_area` scale**
+and the **June 2026 operating-regime change for NK-7** for separate review.
+An IQR rule fitted only on the chronological training period supplies an
+additional statistical screening indicator. These flags do not by themselves
+confirm an equipment fault. The descriptive figures cover the full period;
+no forecasting model is fitted.
 
-## Baseline and two methods
+## Baseline and two comparison methods
 
-The assignment permits processing-time comparisons for this cluster. The
-experiment compares a Python loop baseline, Pandas `groupby().shift()` with subtraction and SQLite
-`LAG()` for **the same interior-gap detection problem**. The official chronological
-split is preserved. No unrelated classifier is required for this ETL topic.
+For gap detection, three implementations are evaluated on the **same interior-
+gap task**:
 
-The timing experiment uses prepared inputs, warm execution and a median of three
-uninstrumented runs. Initial CSV reading, shared sorting, Python record conversion,
-database construction and indexing are excluded. Output conversion is included.
-This measures the detection step, not end-to-end ETL throughput.
+1. **Python loop** — sequential baseline that checks the time difference
+   between consecutive observations within each well–parameter series.
+2. **Pandas** — `groupby().shift()` followed by timestamp subtraction.
+3. **SQLite** — a window query using `LAG()`.
 
-A separate `tracemalloc` run records incremental Python-traced allocations.
-Prepared inputs and much of SQLite's native memory are outside that measurement.
-These memory values must not be described as total RAM or used to claim that SQL
-has the smallest overall memory footprint. Actual equality of all output tuples
-is checked. No precision, recall or MAE is invented because the dataset supplies
-no verified equipment-failure labels and this project does not forecast values.
+The original chronological train/test split is preserved. All three methods
+produce identical sets of 1,677 interior gap intervals.
 
-## SQL and relationships
+The timing benchmark uses prepared inputs, a warm-up run, and the median of
+three uninstrumented runs. It excludes the initial CSV import, shared sorting,
+Python record preparation, database construction, and indexing; output
+conversion is included. Therefore, the benchmark compares the **gap-detection
+step**, not complete ETL execution time.
 
-Six tables represent wells, parameters, applicable series, observations, flag
-names and observation–flag links. The `(well_id, parameter)` foreign key prevents
-observations for inapplicable sensors. The observation key has a uniqueness
-constraint. Foreign keys and SQLite integrity checks run during export.
+Memory allocation is measured in a separate run with `tracemalloc`. The values
+represent incremental Python-traced allocations, not total process RAM. In
+particular, SQLite's native allocations are not fully represented. Method
+agreement is verified by comparing output tuples. Because this task does not
+predict sensor failures and has no verified failure labels, the comparison
+uses execution time, measured allocations, and output agreement rather than
+classification scores or forecasting errors.
 
-See `docs/er_diagram.mmd`, `docs/er_diagram.png` and `sql/schema.sql`.
-The 12 queries include joins, aggregation, `HAVING`, a subquery, CTEs and window
-functions. The program reads results into Pandas and writes them to
-`outputs/sql/`, where the dashboard can display them.
+## SQL and database relationships
 
-## Before submission
+The normalized SQLite database contains **six tables**: wells, parameters,
+applicable well–parameter series, observations, flag types, and observation–flag
+links. A foreign key on `(well_id, parameter)` prevents storing observations
+for inapplicable sensor series. Observation keys have a uniqueness constraint.
+The pipeline enables foreign-key enforcement and performs integrity checks.
 
-1. Run the project on the laptop that will be used for the defense.
-2. Replace the proposed contribution allocation with each person's actual work
-   in the report and presentation.
-3. Review the Russian defense notes and rehearse the dashboard demonstration.
-4. Create your own GitHub repository and upload the code. `.gitignore` omits
-   generated large data and databases; `download.py` recreates the inputs.
-5. Add the actual repository URL to the report/presentation if your teacher
-   requires it. Do not invent a URL or commit history.
-6. Upload the report and presentation to Moodle at least 2–3 days before the
-   final exam, as required in the assignment. Confirm the exam date yourself.
+See `docs/er_diagram.mmd`, `docs/er_diagram.png`, and `sql/schema.sql` for the
+database structure. The **12 analytical SQL queries** use joins, aggregates,
+`GROUP BY`/`HAVING`, subqueries, common table expressions (CTEs), and window
+functions such as `LAG()`. Their results are loaded into Pandas and saved
+under `outputs/sql/`, where they can also be viewed in the dashboard.
 
-The attached assignment explicitly lists topic 19 among the dataset-size
-exceptions. Artificially duplicating rows to reach 500,000 would damage the
-analysis and is unnecessary. Follow your university's rules for assistance and
-be prepared to explain every module.
+## Data sources and limitations
 
-## Data source and limitations
+The v2 dataset and earlier v1 release were published by Arailym Tleubayeva:
 
-Sources, attribution and pinned revisions are documented in `DATA_SOURCES.md`.
-The provider is Galaz and Company LLP. The source assigns the year 2026 from file
-order; timestamps should be checked against SCADA before operational use. The
-cause of the May scale change and many cross-version discrepancies remains
-unverified. The final table fits in memory; chunked parsing does not make all
-subsequent analyses out of core.
+- [NK Oil Well Sensor Monitoring v2](https://huggingface.co/datasets/Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring-v2)
+- [NK Oil Well Sensor Monitoring v1](https://huggingface.co/datasets/Arailym-tleubayeva/NK-Oil-Well-Sensor-Monitoring)
+
+Source attribution and pinned revisions are documented in
+[`DATA_SOURCES.md`](DATA_SOURCES.md). The readings are attributed to **Galaz
+and Company LLP**. The source assigns the year 2026 based on file ordering;
+operational use would require verifying the timestamps against SCADA records.
+The reason for the May scale change and many differences between v1 and v2
+remains unverified. The full processed table fits in memory; chunked input
+parsing does not make every downstream calculation out-of-core.
+
+The course project specification lists **topic 19** among the exceptions to
+the recommended dataset size of 500,000 rows or 200 MB. The original data is
+analyzed without artificially duplicating measurements.
